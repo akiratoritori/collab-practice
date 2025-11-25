@@ -62,6 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+const attachConfettiButton = () => {
+  const trigger = document.querySelector('[data-confetti-btn]');
+  if (!trigger) return;
+
+  trigger.addEventListener('click', (event) => {
+    event.stopPropagation(); // 二重発火を防ぐ
+    const rect = trigger.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    spawnConfetti(x, y, 26);
+  });
+};
+
+attachConfettiButton();
+
   const draw = (t) => {
     const time = t * 0.001;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);

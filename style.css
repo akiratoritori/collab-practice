@@ -119,6 +119,18 @@ nav a:focus-visible::after {
     transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
+.btn.tiny {
+    padding: 8px 12px;
+    font-size: 13px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.stat .btn {
+    width: 100%;
+    margin-top: 8px;
+}
+
+
 .btn:hover,
 .btn:focus-visible {
     transform: translateY(-1px);
