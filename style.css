@@ -394,3 +394,31 @@ footer {
         transform: translate(-50%, -50%) translate(var(--dx, 0px), var(--dy, -80px)) rotate(320deg) scale(0.6);
     }
 }
+/* ===== 蛇キャラクター ===== */
+.snake-character {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 120px;
+    height: 120px;
+    z-index: 4;               /* コンテンツより前面に出す */
+    background: url("snake.png") no-repeat center/contain;
+    pointer-events: none;     /* クリックの邪魔をしない */
+    animation: snake-wiggle 1800ms ease-in-out infinite;
+}
+
+/* くねくね動くアニメーション */
+@keyframes snake-wiggle {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-4px) rotate(-4deg);
+    }
+    50% {
+        transform: translateY(2px) rotate(3deg);
+    }
+    75% {
+        transform: translateY(-3px) rotate(-2deg);
+    }
+}
