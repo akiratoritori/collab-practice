@@ -7,15 +7,40 @@ body {
 }
 
 header {
-    background: #333;
+    background: rgba(28, 28, 28, 0.82);
     color: white;
     padding: 15px;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
 
 nav a {
     margin-right: 15px;
     color: white;
     text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #ff6ec4, #7873f5, #4ade80);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 220ms ease-out;
+}
+
+nav a:hover::after,
+nav a:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 section {
@@ -46,4 +71,38 @@ section,
 footer {
     position: relative;
     z-index: 1;
+}
+
+/* クリックで弾ける紙吹雪 */
+#burst-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 16px;
+    border-radius: 3px;
+    background: var(--color, #fff176);
+    top: var(--top, 0px);
+    left: var(--left, 0px);
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    animation: confetti-pop 900ms ease-out forwards;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes confetti-pop {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(var(--dx, 0px), var(--dy, -80px)) rotate(320deg) scale(0.6);
+    }
 }
