@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const blobs = [];
   const blobCount = 22;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const burstLayer = document.createElement('div');
+  burstLayer.id = 'burst-layer';
+  document.body.appendChild(burstLayer);
+  const burstPalette = ['#ff6ec4', '#ffd166', '#4ade80', '#60a5fa', '#f97316', '#f43f5e'];
 
   const resize = () => {
     const { innerWidth, innerHeight } = window;
@@ -35,6 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
     blobs.length = 0;
     for (let i = 0; i < blobCount; i += 1) {
       blobs.push(makeBlob());
+    }
+  };
+
+  const spawnConfetti = (x, y, count = 18) => {
+    for (let i = 0; i < count; i += 1) {
+      const chip = document.createElement('span');
+      chip.className = 'confetti';
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 60 + Math.random() * 80;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance - 60;
+      chip.style.setProperty('--dx', `${dx}px`);
+      chip.style.setProperty('--dy', `${dy}px`);
+      chip.style.setProperty('--top', `${y}px`);
+      chip.style.setProperty('--left', `${x}px`);
+      chip.style.setProperty('--color', burstPalette[i % burstPalette.length]);
+      chip.style.width = `${8 + Math.random() * 6}px`;
+      chip.style.height = `${12 + Math.random() * 10}px`;
+      burstLayer.appendChild(chip);
+      setTimeout(() => chip.remove(), 950);
     }
   };
 
@@ -69,5 +93,17 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', () => {
     resize();
     init();
+  });
+
+  const burstFromEvent = (event) => {
+    spawnConfetti(event.clientX, event.clientY);
+  };
+
+  document.addEventListener('click', burstFromEvent);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === ' ') {
+      event.preventDefault();
+      spawnConfetti(window.innerWidth / 2, window.innerHeight / 2);
+    }
   });
 });
