@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background: #f4f4f4;
+    overflow-x: hidden;
 }
 
 header {
@@ -25,4 +26,24 @@ footer {
     text-align: center;
     padding: 10px;
     background: #ddd;
+}
+
+/* カラフルな背景を配置するキャンバス */
+#color-splash {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+    filter: blur(14px) saturate(120%);
+}
+
+/* コンテンツを前面に押し出す */
+header,
+section,
+footer {
+    position: relative;
+    z-index: 1;
 }
