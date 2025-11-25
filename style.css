@@ -1,49 +1,140 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f4f4;
-    overflow-x: hidden;
-}
-
-header {
-    background: #333;
-    color: white;
-    padding: 15px;
-}
-
-nav a {
-    margin-right: 15px;
-    color: white;
-    text-decoration: none;
-}
-
-section {
-    padding: 20px;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background: #ddd;
-}
-
-/* カラフルな背景を配置するキャンバス */
+/* 背景用キャンバス */
 #color-splash {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
+    z-index: -1;
     pointer-events: none;
-    z-index: 0;
-    opacity: 0.6;
-    filter: blur(14px) saturate(120%);
 }
 
-/* コンテンツを前面に押し出す */
-header,
-section,
-footer {
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ガラス風ヘッダー・フッター */
+.glass-header,
+.glass-footer {
     position: relative;
-    z-index: 1;
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(16px);
+    background: rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-footer {
+    justify-content: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin-top: 40px;
+}
+
+.logo {
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+nav a {
+    margin-left: 16px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+/* 中央カード */
+.hero {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+}
+
+.hero-card {
+    max-width: 640px;
+    width: 100%;
+    padding: 32px 28px;
+    border-radius: 24px;
+    backdrop-filter: blur(22px);
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-card h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+
+.hero-card p {
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+/* ボタン */
+.hero-buttons {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(120deg, #ff6ec7, #ffd66e, #6ef7ff);
+    color: #111;
+    box-shadow: 0 0 16px rgba(255, 110, 199, 0.8);
+    animation: glow 2.2s ease-in-out infinite alternate;
+}
+
+.btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* アニメーション */
+@keyframes float {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 12px rgba(255, 110, 199, 0.7); }
+    100% { box-shadow: 0 0 22px rgba(110, 247, 255, 0.95); }
 }
